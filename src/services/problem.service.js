@@ -33,11 +33,27 @@ class ProblemService {
 
   async getProblem(problemId) {
     try {
-      console.log(problemId);
       const problem = this.problemRepository.getProblem(problemId);
       return problem;
     } catch (error) {
       throw error;
+    }
+  }
+  async deleteProblemById(problemId){
+    try {
+      const problem_id=this.problemRepository.deleteProblemById(problemId)
+      return problem_id;
+    } catch (error) {
+      throw(error)
+    }
+  }
+  async updateProblemById(problemId,updatedProblemdata){
+    try {
+      updatedProblemdata.description=sanitizeMarkdownContent(updatedProblemdata.description)
+      const updatedproblem=this.problemRepository.updateProblemById(problemId,updatedProblemdata)
+      return updatedproblem
+    } catch (error) {
+      throw(error)
     }
   }
 }
