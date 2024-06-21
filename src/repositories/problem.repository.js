@@ -1,4 +1,5 @@
 // all the queries to db are going to be written here
+const logger = require("../config/logger.config");
 const NotFound = require("../errors/notfound.error");
 const { Problem } = require("../models");
 
@@ -34,6 +35,7 @@ class ProblemRepository {
   async deleteProblemById(id) {
     const problemId=await Problem.findByIdAndDelete(id);
     if(!problemId){
+      logger.error(`Problem_Repository: Problem with id: ${id} not found in the db`)
       throw new NotFound(id);
     }
     return problemId; 
