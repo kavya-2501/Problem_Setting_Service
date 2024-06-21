@@ -1,8 +1,11 @@
 // all the queries to db are going to be written here
+const NotFound = require("../errors/notfound.error");
 const { Problem } = require("../models");
 
-// here the entries are created in the database  
+// here the entries are created in the database   (mongoose codes)
 // here we have the crud for mongodb, suppose in future we have to add for mysql, we only have to change code here and services won't be affected.
+
+
 class ProblemRepository {
   async createProblem(problemData) {
     try {
@@ -30,6 +33,9 @@ class ProblemRepository {
 
   async deleteProblemById(id) {
     const problemId=await Problem.findByIdAndDelete(id);
+    if(!problemId){
+      throw new NotFound(id);
+    }
     return problemId; 
   }
 

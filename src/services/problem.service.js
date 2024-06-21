@@ -1,5 +1,6 @@
 const sanitizeMarkdownContent = require("../utils/markdownSanitizer");
 
+// all the methods in repository class are called here and arguments are passed and values returned
 class ProblemService {
   constructor(problemRepository) {
     this.problemRepository = problemRepository;
